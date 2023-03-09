@@ -12,9 +12,13 @@ const Brick = (props) => {
         backgroundColor: color,
     };
 
+    if (hitCount === 0) {
+        return null;
+    }
+
     return (
         <div style={style}>
-            {hitCount === 0 ? null : <div>{hitCount}</div>}
+            {hitCount}
         </div>
     );
 };
