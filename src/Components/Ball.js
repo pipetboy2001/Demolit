@@ -69,16 +69,15 @@ class Ball extends Component {
             }
         }
 
-
-        // // Detecta fin del juego
-        // if (y + radius >= window.innerHeight) {
-        //     onGameOver();
-        //     return;
-        // }
-        // Detecta colisión con el borde inferior de la pantalla
+        // Detecta fin del juego
         if (y + radius >= LimitY) {
-            this.setState({ dy: -Math.abs(dy) });
+            onGameOver();
+            return;
         }
+        // // Detecta colisión con el borde inferior de la pantalla
+        // if (y + radius >= LimitY) {
+        //     this.setState({ dy: -Math.abs(dy) });
+        // }
         
         // Actualiza posición de la bola
         this.setState({ x: x + dx, y: y + dy });
