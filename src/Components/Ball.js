@@ -56,6 +56,12 @@ class Ball extends Component {
             return;
         }
 
+        // Agrega la comprobación para el borde superior de la pantalla
+        if (y - radius <= 0) {
+            this.setState({ dy: Math.abs(dy) });
+        }
+
+
         // Actualiza posición de la bola
         this.setState({ x: x + dx, y: y + dy });
 
