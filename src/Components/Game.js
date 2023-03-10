@@ -10,6 +10,11 @@ function Game(props) {
     const [ballKey, setBallKey] = useState(0);
     const [bricks, setBricks] = useState(bricksData);
 
+    const paddleX = 700;
+    const paddleY = 400;
+    const paddleWidth = 100;
+    const paddleHeight = 20;
+
     const handleGameOver = () => {
         setGameOver(true);
     };
@@ -28,20 +33,27 @@ function Game(props) {
                     </div>
                 ) : (
                     <>
-                        <Paddle x={700} y={400} width={100} height={20} speed={10} />
-                        <Ball
-                            key={ballKey}
-                            x={window.innerWidth / 2}
-                            y={window.innerHeight / 2}
-                            dx={5}
-                            dy={5}
-                            radius={10}
-                            paddleX={0}
-                            paddleY={400}
-                            paddleWidth={100}
-                            paddleHeight={20}
-                            onGameOver={handleGameOver}
-                        />
+                            <Paddle
+                                speed={10} 
+                                x={paddleX}
+                                y={paddleY}
+                                width={paddleWidth}
+                                height={paddleHeight} />
+                            <Ball
+                                key={ballKey}
+                                x={window.innerWidth / 2}
+                                y={window.innerHeight / 2}
+                                dx={5}
+                                dy={5}
+                                radius={10}
+                                paddleX={paddleX} // pasa el valor de paddleX aquí
+                                paddleY={paddleY}
+                                paddleWidth={paddleWidth}
+                                paddleHeight={paddleHeight}
+                                onGameOver={handleGameOver}
+                            />
+
+
                             {bricks.map((brick, index) => (
                                 <Brick key={index} {...brick} />
                             ))}

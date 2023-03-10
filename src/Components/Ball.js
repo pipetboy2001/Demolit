@@ -28,13 +28,17 @@ class Ball extends Component {
             x + radius >= paddleX &&
             x - radius <= paddleX + paddleWidth
         ) {
-            // Calcula la posición de la colisión en la barra
-            const collisionPoint = x - paddleX - paddleWidth / 2;
-            // Calcula el ángulo de rebote en función de la posición de la colisión
-            const angle = collisionPoint / (paddleWidth / 2) * Math.PI / 3;
-            // Cambia la dirección de la pelota en el eje x y el eje y en función del ángulo de rebote
-            this.setState({ dx: Math.sin(angle) * radius * 5, dy: -Math.cos(angle) * radius * 5 });
+            // Cambia la dirección de la pelota en el eje y
+            this.setState({ dy: -dy });
+            // Agrega una velocidad fija en el eje x para evitar que la pelota quede atrapada en la barra
+            if (dx > 0) {
+                this.setState({ dx: 5 });
+            } else {
+                this.setState({ dx: -5 });
+            }
         }
+
+
 
         // Detecta colisión con los bordes
         if (x + radius >= window.innerWidth || x - radius <= 0) {
