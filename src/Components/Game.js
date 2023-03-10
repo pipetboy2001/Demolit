@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 import Paddle from './Paddle';
 import Ball from './Ball';
 import '../Style/Game.css';
@@ -16,34 +16,41 @@ function Game(props) {
     const paddleHeight = 20;
     const TamañoCuadradowidth = 990;
     const TamañoCuadradoheight = 480;
-    const containerWidth = 990;
-    const containerHeight = 100;
 
     const handleGameOver = () => {
         setGameOver(true);
     };
     const handleRestart = () => {
         setGameOver(false);
-        setBallKey(ballKey + 1);
+        setBallKey(ballKey + 1); //reiniciar la bola
+        setBricks(bricksData); // reinicia los bloques a su configuración inicial
     };
+
 
     const [paddlePosition, handlePaddleMove] = usePaddlePosition(paddleX);
 
 
-    const handleBrickCollision = (index) => {
-        // Haz una copia del estado de bloques
+    function handleBrickCollision(index) {
+        // haz una copia del estado de bloques
         const newBricks = [...bricks];
-        // Elimina el bloque de la lista
-        newBricks.splice(index, 1);
-        // Actualiza el estado de los bloques
+        // actualiza el bloque que fue golpeado
+        const hitCount = newBricks[index].hitCount - 1;
+        if (hitCount <= 0) {
+            // elimina el bloque de la lista si ha sido destruido
+            newBricks.splice(index, 1);
+        } else {
+            // actualiza el contador de golpes si el bloque aún no ha sido destruido
+            newBricks[index].hitCount = hitCount;
+        }
+        // actualiza el estado de los bloques
         setBricks(newBricks);
-    };
+    }
 
+    //Funcion que lee la posicion de la barra
     function usePaddlePosition(initialPosition) {
         const [paddleX, setPaddleX] = useState(initialPosition);
         const handlePaddleMove = (x) => {
             setPaddleX(x);
-            console.log(`La posición de la barra en game es: ${x}`);
         };
         return [paddleX, handlePaddleMove];
     }
@@ -80,10 +87,10 @@ function Game(props) {
                             paddleWidth={paddleWidth}//tamaño de anchura de la barra
                             paddleHeight={paddleHeight}//tamaño dee altura de la barra
                             onGameOver={handleGameOver}//mandar funcion de terminar juego
-                            onBrickCollision={handleBrickCollision} // Agregar la función de colisión de bloques
-                            bricks={bricks} // Agregar el array de bloques
                             LimitX={TamañoCuadradowidth}
                             LimitY={TamañoCuadradoheight}
+                            bricks={bricks}
+                            onBrickCollision={handleBrickCollision}
                         />
                         {bricks.map((brick, index) => (
                             <Brick

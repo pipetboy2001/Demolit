@@ -20,10 +20,28 @@ class Ball extends Component {
 
     animate = () => {
         const { x, y, dx, dy, radius } = this.state;
-        const { paddleX, paddleY, paddleWidth, paddleHeight, onGameOver, LimitX, LimitY } = this.props;
+        const { paddleX, paddleY, paddleWidth, paddleHeight, onGameOver, LimitX, LimitY, bricks, onBrickCollision } = this.props;
         
-        console.log("el paddleX en ball es" + paddleX);
-        
+        // Bucle para recorrer los bloques
+        for (let i = 0; i < bricks.length; i++) {
+            const brick = bricks[i];
+            console.log("Posición del bloque " + i + ": (" + brick.position.x + ", " + brick.position.y + ")");
+
+            // Detecta colisión con el bloque
+            if (
+                y - radius <= brick.position.y + brick.height &&
+                y + radius >= brick.position.y &&
+                x + radius >= brick.position.x &&
+                x - radius <= brick.position.x + brick.width
+            ) {
+                // Cambia la dirección de la pelota en el eje y
+                this.setState({ dy: -dy });
+                //borra un cuadrado inmediatamente
+                onBrickCollision(i);
+            }
+        }
+
+
         // Detecta colisión con los bordes
         if (x + radius >= window.innerWidth || x - radius <= 0) {
             this.setState({ dx: -dx });
@@ -78,10 +96,8 @@ class Ball extends Component {
         // if (y + radius >= LimitY) {
         //     this.setState({ dy: -Math.abs(dy) });
         // }
-        
         // Actualiza posición de la bola
         this.setState({ x: x + dx, y: y + dy });
-
         // Solicita nueva animación
         this.animationId = requestAnimationFrame(this.animate);
     };
