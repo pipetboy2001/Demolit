@@ -21,8 +21,9 @@ class Ball extends Component {
     animate = () => {
         const { x, y, dx, dy, radius } = this.state;
         const { paddleX, paddleY, paddleWidth, paddleHeight, onGameOver, LimitX, LimitY } = this.props;
-        console.log("el window.innerHeight es" + window.innerHeight);
-        console.log("el y es" + LimitY);
+        
+        console.log("el paddleX en ball es" + paddleX);
+        
         // Detecta colisión con los bordes
         if (x + radius >= window.innerWidth || x - radius <= 0) {
             this.setState({ dx: -dx });
