@@ -18,6 +18,8 @@ class Ball extends Component {
     }
 
     animate = () => {
+        const MAX_ANGLE = Math.PI * (5 / 6);
+        const MIN_ANGLE = Math.PI * (4 / 6);
         const { x, y, dx, dy, radius } = this.state;
         const { paddleX, paddleY, paddleWidth, paddleHeight, onGameOver } = this.props;
 
@@ -30,15 +32,16 @@ class Ball extends Component {
         ) {
             // Cambia la dirección de la pelota en el eje y
             this.setState({ dy: -dy });
-            // Agrega una velocidad fija en el eje x para evitar que la pelota quede atrapada en la barra
-            if (dx > 0) {
-                this.setState({ dx: 5 });
-            } else {
-                this.setState({ dx: -5 });
-            }
+            // Cambia la dirección de la pelota en el eje x, dependiendo de la posición en la que toque la barra
+            const ballPositionOnPaddle = x - paddleX;
+            const paddleCenter = paddleWidth / 2;
+            const ballPositionRelativeToCenter = ballPositionOnPaddle - paddleCenter;
+            const maxPositionFromCenter = paddleCenter - radius;
+            const positionRelativeToMax = ballPositionRelativeToCenter / maxPositionFromCenter;
+            const angle = positionRelativeToMax * MAX_ANGLE;
+            const newDx = -dy * Math.tan(angle);
+            this.setState({ dx: newDx });
         }
-
-
 
         // Detecta colisión con los bordes
         if (x + radius >= window.innerWidth || x - radius <= 0) {
@@ -59,6 +62,7 @@ class Ball extends Component {
         // Solicita nueva animación
         this.animationId = requestAnimationFrame(this.animate);
     };
+
 
     render() {
         const { x, y, radius } = this.state;

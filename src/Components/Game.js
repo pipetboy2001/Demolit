@@ -10,7 +10,7 @@ function Game(props) {
     const [ballKey, setBallKey] = useState(0);
     const [bricks, setBricks] = useState(bricksData);
 
-    const paddleX = 700;
+    const paddleX = 900;
     const paddleY = 400;
     const paddleWidth = 100;
     const paddleHeight = 20;
