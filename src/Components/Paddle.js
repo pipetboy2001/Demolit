@@ -16,15 +16,17 @@ class Paddle extends Component {
 
     handleKeyDown = (event) => {
         const { x } = this.state;
-        const { speed, width } = this.props;
+        const { speed, width, LimitX } = this.props;
         const { key } = event;
 
         if (key === 'ArrowLeft') {
             this.setState({ x: Math.max(x - speed, 0) });
         } else if (key === 'ArrowRight') {
-            this.setState({ x: Math.min(x + speed, window.innerWidth - width) });
+            this.setState({ x: Math.min(x + speed, LimitX - width) });
         }
+
     };
+
 
     handleCollision = (ballX, ballY, ballRadius, ballVelocityX, ballVelocityY) => {
         const { x, y, width, height } = this.props;
@@ -40,17 +42,13 @@ class Paddle extends Component {
         if (ballBottom >= paddleTop && ballTop <= paddleBottom && ballRight >= paddleLeft && ballLeft <= paddleRight) {
             // Calculate the point of contact
             const contactPoint = ballX - (x + (width / 2));
-
             // Normalize the contact point to a range between -1 and 1
             const normalizedContactPoint = contactPoint / (width / 2);
-
             // Calculate the angle of deflection
             const angle = normalizedContactPoint * Math.PI / 3;
-
             // Calculate the new velocity values
             const newVelocityX = ballVelocityX * Math.cos(angle) + ballVelocityY * Math.sin(angle);
             const newVelocityY = ballVelocityX * Math.sin(angle) - ballVelocityY * Math.cos(angle);
-
             // Update the velocity values
             return { ballVelocityX: newVelocityX, ballVelocityY: -newVelocityY };
         } else {

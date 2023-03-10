@@ -10,10 +10,12 @@ function Game(props) {
     const [ballKey, setBallKey] = useState(0);
     const [bricks, setBricks] = useState(bricksData);
 
-    const paddleX = 900;
+    const paddleX = 700;
     const paddleY = 400;
     const paddleWidth = 100;
     const paddleHeight = 20;
+    const TamañoCuadradowidth = 990;
+    const TamañoCuadradoheight = 100;
 
     const handleGameOver = () => {
         setGameOver(true);
@@ -38,7 +40,10 @@ function Game(props) {
                                 x={paddleX}
                                 y={paddleY}
                                 width={paddleWidth}
-                                height={paddleHeight} />
+                                height={paddleHeight} 
+                                LimitX={TamañoCuadradowidth}
+                                LimitY={TamañoCuadradoheight}
+                                />
                             <Ball
                                 key={ballKey}
                                 x={window.innerWidth / 2}
@@ -48,10 +53,13 @@ function Game(props) {
                                 radius={10}
                                 paddleX={paddleX} // pasa el valor de paddleX aquí
                                 paddleY={paddleY}
+
                                 paddleWidth={paddleWidth}
                                 paddleHeight={paddleHeight}
                                 onGameOver={handleGameOver}
                             />
+
+                            
 
 
                             {bricks.map((brick, index) => (
