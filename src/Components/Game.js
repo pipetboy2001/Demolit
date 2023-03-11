@@ -12,7 +12,7 @@ function WelcomeScreen({ onStartGame }) {
         <div className="background-image">
             <div className="game-title">
                 <h1 class="game-title__heading">¡DEMOLIT!</h1>
-                <p class="game-title__created-by">Creado por <a href="https://github.com/pipetboy2001">Pipetboy</a></p>
+                <p class="game-title__created-by">Creado por <a className='Link' href="https://github.com/pipetboy2001">Pipetboy</a></p>
                 <button class="game-title__btn-start" onClick={onStartGame}>¡Comenzar a jugar!</button>
             </div>
         </div>
