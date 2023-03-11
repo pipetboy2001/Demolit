@@ -68,7 +68,7 @@
     "position": { "x": 900, "y": 100 },
     "width": 50,
     "height": 20,
-    "color": "black",
+    "color": "pink",
     "hitCount": 9
   },
   {
@@ -148,7 +148,7 @@
     "position": { "x": 100, "y": 200 },
     "width": 50,
     "height": 20,
-    "color": "black",
+    "color": "pink",
     "hitCount": 19
   },
   {
