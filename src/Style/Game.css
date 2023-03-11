@@ -7,8 +7,8 @@
     background-color: rgb(179, 179, 179); /* Color de fondo */
     border: 5px solid rgb(158, 158, 158);    /* Grosor y color del borde */
     box-sizing: border-box;    /* Incluye el grosor del borde en el ancho y altura del elemento */
-    width: 90%;    /* Ancho del elemento */
-    height: 500px;
+    width: 1000px;    /* Ancho del elemento */
+    height: 100vh;
     margin: 0 auto;    /* Margen automático para centrar el elemento */
     padding: 10px;    /* Espacio entre el borde y el contenido */
     position: relative;    /* Posicionamiento relativo */
