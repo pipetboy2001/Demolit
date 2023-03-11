@@ -98,7 +98,7 @@ function Game(props) {
                             x={window.innerWidth / 2} //donde parte la bola
                             y={window.innerHeight / 2} //donde parte la bola
                             dx={3} //velocidad horizonta
-                            dy={3} //velocidad vertical
+                            dy={-3} //velocidad vertical
                             radius={10}
                             paddleX={paddlePosition}//barra en x
                             paddleY={paddleY}//barra en Y
