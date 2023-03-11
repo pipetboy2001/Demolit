@@ -67,8 +67,8 @@ class Paddle extends Component {
                 }}
             />
 
-            <button className='BotonesMover' onClick={this.handleMoveLeft}>Izquierda</button>
-            <button className='BotonesMover' onClick={this.handleMoveRight}>Derecha</button>
+            {/* <button className='BotonesMover' onClick={this.handleMoveLeft}>Izquierda</button>
+            <button className='BotonesMover' onClick={this.handleMoveRight}>Derecha</button>*/}
             </>
         );
     }
