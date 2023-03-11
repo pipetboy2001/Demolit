@@ -45,7 +45,9 @@ class Ball extends Component {
 
         // Verifica si no quedan bloques y muestra el mensaje de "GANASTE!"
         if (remainingBricks === 0) {
+            alert("Ganaste!");
             onFinish();
+            return;
         }
 
 
