@@ -8,16 +8,34 @@ import bricksData from '../Json/Brick.json';
 
 //Pantalla de bienevenida
 function WelcomeScreen({ onStartGame }) {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth < 1000) {
+        return (
+            <div className='background-warning'>
+                <p className="game-title__warning-text">
+                    El juego no es compatible con pantallas de menos de 1000px de ancho.
+                </p>
+                <img src="https://media3.giphy.com/media/IT6kBZ1k5oEeI/giphy.gif?cid=ecf05e47dd54ve0awzif5o0bdsunf49yiu1rr4v0e1yj3lbd&rid=giphy.gif&ct=g" alt="Advertencia" className="warning-image" />
+            </div>
+        );
+    }
     return (
         <div className="background-image">
             <div className="game-title">
-                <h1 class="game-title__heading">¡DEMOLIT!</h1>
-                <p class="game-title__created-by">Creado por <a className='Link' href="https://github.com/pipetboy2001">Pipetboy</a></p>
-                <button class="game-title__btn-start" onClick={onStartGame}>¡Comenzar a jugar!</button>
+                <h1 className="game-title__heading">¡DEMOLIT!</h1>
+                <p className="game-title__created-by">
+                    Creado por <a className="Link" href="https://github.com/pipetboy2001">Pipetboy</a>
+                </p>
+                <button className="game-title__btn-start" onClick={onStartGame}>
+                    ¡Comenzar a jugar!
+                </button>
             </div>
         </div>
     );
 }
+
+
 
 function Game(props) {
     const [gameStarted, setGameStarted] = useState(false);

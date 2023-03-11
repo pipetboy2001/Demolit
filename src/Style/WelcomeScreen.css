@@ -64,7 +64,31 @@
     background-color: #FF8C00;
 }
 
+/*warning*/
+.game-title__warning-text {
+    background-color: #f44336;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    text-align: center;
+    animation: blink 1s infinite;
+}
 
+
+.warning-image{
+    width: 100%;
+}
+
+.background-warning{
+    background-color: #000000;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    text-align: center;
+    animation: blink 1s infinite;
+    width: 100vw;
+    height: 100vh;
+}
 
 /*Game Over*/
 .gameOver {
