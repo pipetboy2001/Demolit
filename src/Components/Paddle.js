@@ -4,6 +4,8 @@ class Paddle extends Component {
     state = {
         x: this.props.x,
         y: this.props.y,
+        movingLeft: false,
+        movingRight: false,
     };
     componentDidMount() {
         window.addEventListener('keydown', this.handleKeyDown);
@@ -27,11 +29,33 @@ class Paddle extends Component {
     console.log(`Posición actual de la barra: ${this.state.x}`);
 };
 
+    handleMoveLeft = () => {
+        const { x } = this.state;
+        const { speed, onPaddleMove } = this.props;
+        const newPosition = Math.max(x - speed, 0);
+        this.setState({ x: newPosition }, () => {
+            onPaddleMove(this.state.x);
+        });
+    };
+
+    handleMoveRight = () => {
+        const { x } = this.state;
+        const { speed, LimitX, width, onPaddleMove } = this.props;
+        const newPosition = Math.min(x + speed, LimitX - width);
+        this.setState({ x: newPosition }, () => {
+            onPaddleMove(this.state.x);
+        });
+    };
+
+
     render() {
         const { x, y } = this.state;
         const { width, height } = this.props;
+        
 
         return (
+            <>
+            
             <div
                 style={{
                     position: 'absolute',
@@ -42,6 +66,10 @@ class Paddle extends Component {
                     backgroundColor: 'white',
                 }}
             />
+
+            <button className='BotonesMover' onClick={this.handleMoveLeft}>Izquierda</button>
+            <button className='BotonesMover' onClick={this.handleMoveRight}>Derecha</button>
+            </>
         );
     }
 }
