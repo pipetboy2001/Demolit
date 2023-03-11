@@ -21,12 +21,12 @@ class Ball extends Component {
     animate = () => {
         const { x, y, dx, dy, radius } = this.state;
         const { paddleX, paddleY, paddleWidth, paddleHeight, onGameOver, LimitX, LimitY, bricks, onBrickCollision } = this.props;
-        
+
+        // Agrega una variable de conteo para llevar registro de cuántos bloques quedan
+        let remainingBricks = bricks.length;
         // Bucle para recorrer los bloques
         for (let i = 0; i < bricks.length; i++) {
             const brick = bricks[i];
-            console.log("Posición del bloque " + i + ": (" + brick.position.x + ", " + brick.position.y + ")");
-
             // Detecta colisión con el bloque
             if (
                 y - radius <= brick.position.y + brick.height &&
@@ -36,9 +36,17 @@ class Ball extends Component {
             ) {
                 // Cambia la dirección de la pelota en el eje y
                 this.setState({ dy: -dy });
+                // Disminuye el conteo de bloques
+                remainingBricks--;
                 //borra un cuadrado inmediatamente
                 onBrickCollision(i);
             }
+        }
+
+        // Verifica si no quedan bloques y muestra el mensaje de "GANASTE!"
+        if (remainingBricks === 0) {
+            alert('GANASTE!');
+            return;
         }
 
 
