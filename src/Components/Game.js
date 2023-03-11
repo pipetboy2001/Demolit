@@ -39,7 +39,10 @@ function WelcomeScreen({ onStartGame }) {
 
 function Game(props) {
     const [gameStarted, setGameStarted] = useState(false);
+    const [win, setWin] = useState(false);
     const [gameOver, setGameOver] = useState(false);
+    const [gameResult, setGameResult] = useState('');
+
     const [ballKey, setBallKey] = useState(0);
     const [bricks, setBricks] = useState(bricksData);
     const paddleX = 700;
@@ -53,9 +56,17 @@ function Game(props) {
 
     const handleGameOver = () => {
         setGameOver(true);
+        setGameResult('lose');
     };
+    const handleFinish = () => {
+        setWin(true);
+        setGameResult('win');
+    }
+
+
     const handleRestart = () => {
         setGameOver(false);
+        setWin(false);
         setBallKey(ballKey + 1); //reiniciar la bola
         setBricks(bricksData); // reinicia los bloques a su configuración inicial
     };
@@ -95,8 +106,8 @@ function Game(props) {
             <div className='contenedor'>
                 {gameOver ? (
                     <div className='gameOver'>
-                        <h2 class='gameOver__heading'>¡Game Over!</h2>
-                        <p class='gameOver__text'>Lo siento, ¡has perdido!</p>
+                        <h2 class='gameOver__heading'>¡{gameResult === 'win' ? 'Felicidades' : 'Game Over'}!</h2>
+                        <p class='gameOver__text'>{gameResult === 'win' ? '¡Has completado el juego!' : 'Lo siento, ¡has perdido!'} </p>
                         <button class='gameOver__btn-restart' onClick={handleRestart}>¡Jugar de nuevo!</button>
                     </div>
                 ) : (
@@ -123,6 +134,7 @@ function Game(props) {
                             paddleWidth={paddleWidth}//tamaño de anchura de la barra
                             paddleHeight={paddleHeight}//tamaño dee altura de la barra
                             onGameOver={handleGameOver}//mandar funcion de terminar juego
+                            onFinish={handleFinish}//mandar funcion que gano
                             LimitX={TamañoCuadradowidth}
                             LimitY={TamañoCuadradoheight}
                             bricks={bricks}
