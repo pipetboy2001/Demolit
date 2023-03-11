@@ -39,9 +39,9 @@ function WelcomeScreen({ onStartGame }) {
 
 function Game(props) {
     const [gameStarted, setGameStarted] = useState(false);
-    const [win, setWin] = useState(false);
     const [gameOver, setGameOver] = useState(false);
     const [gameResult, setGameResult] = useState('');
+    const [win, setWin] = useState(false);
 
     const [ballKey, setBallKey] = useState(0);
     const [bricks, setBricks] = useState(bricksData);
@@ -59,8 +59,8 @@ function Game(props) {
         setGameResult('lose');
     };
     const handleFinish = () => {
-        setWin(true);
         setGameResult('win');
+        setWin(true);
     }
 
 
@@ -104,7 +104,7 @@ function Game(props) {
     return (
         <div className='TamañoPagina'>
             <div className='contenedor'>
-                {gameOver ? (
+                {gameOver||win ? (
                     <div className='gameOver'>
                         <h2 class='gameOver__heading'>¡{gameResult === 'win' ? 'Felicidades' : 'Game Over'}!</h2>
                         <p class='gameOver__text'>{gameResult === 'win' ? '¡Has completado el juego!' : 'Lo siento, ¡has perdido!'} </p>
