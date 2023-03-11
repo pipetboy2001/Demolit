@@ -1,21 +1,37 @@
-import React, { useState ,useEffect } from 'react';
+import React, { useState } from 'react';
 import Paddle from './Paddle';
 import Ball from './Ball';
 import '../Style/Game.css';
+import '../Style/WelcomeScreen.css'
 import Brick from './Brick';
 import bricksData from '../Json/Brick.json';
 
+//Pantalla de bienevenida
+function WelcomeScreen({ onStartGame }) {
+    return (
+        <div className="background-image">
+            <div className="game-title">
+                <h1 class="game-title__heading">¡DEMOLIT!</h1>
+                <p class="game-title__created-by">Creado por <a href="https://github.com/pipetboy2001">Pipetboy</a></p>
+                <button class="game-title__btn-start" onClick={onStartGame}>¡Comenzar a jugar!</button>
+            </div>
+        </div>
+    );
+}
+
 function Game(props) {
+    const [gameStarted, setGameStarted] = useState(false);
     const [gameOver, setGameOver] = useState(false);
     const [ballKey, setBallKey] = useState(0);
     const [bricks, setBricks] = useState(bricksData);
-
     const paddleX = 700;
     const paddleY = 400;
     const paddleWidth = 100;
     const paddleHeight = 20;
     const TamañoCuadradowidth = 990;
     const TamañoCuadradoheight = 480;
+    const [paddlePosition, handlePaddleMove] = usePaddlePosition(paddleX);
+
 
     const handleGameOver = () => {
         setGameOver(true);
@@ -26,9 +42,10 @@ function Game(props) {
         setBricks(bricksData); // reinicia los bloques a su configuración inicial
     };
 
-
-    const [paddlePosition, handlePaddleMove] = usePaddlePosition(paddleX);
-
+    //colocar para que al inicio parta la funcion welcomeScreen
+    if (!gameStarted) {
+        return <WelcomeScreen onStartGame={() => setGameStarted(true)} />;
+    }
 
     function handleBrickCollision(index) {
         // haz una copia del estado de bloques
@@ -60,8 +77,9 @@ function Game(props) {
             <div className='contenedor'>
                 {gameOver ? (
                     <div className='gameOver'>
-                        <p>Game Over</p>
-                        <button onClick={handleRestart}>Restart</button>
+                        <h2 class='gameOver__heading'>¡Game Over!</h2>
+                        <p class='gameOver__text'>Lo siento, ¡has perdido!</p>
+                        <button class='gameOver__btn-restart' onClick={handleRestart}>¡Jugar de nuevo!</button>
                     </div>
                 ) : (
                     <>

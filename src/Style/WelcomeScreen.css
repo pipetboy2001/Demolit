@@ -1,0 +1,92 @@
+/*Welcome Screen*/
+.background-image {
+    background-image: url('../Assets/Background.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+}
+
+.game-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.game-title__heading {
+    color: white;
+    font-size: 5em;
+    font-family: Arial, sans-serif;
+    text-shadow: 2px 2px 2px black;
+    margin: 0;
+    padding: 0;
+}
+
+.game-title__btn-start {
+    background-color: #FF4500;
+    color: white;
+    font-size: 1.5em;
+    font-family: Arial, sans-serif;
+    text-shadow: 1px 1px 1px black;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.game-title__btn-start:hover {
+    background-color: #FF8C00;
+}
+
+.game-title__created-by {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: rgb(255, 166, 0);
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    text-shadow: 1px 1px 1px black;
+    
+}
+
+/*Game Over*/
+.gameOver {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.gameOver__heading {
+    font-size: 4em;
+    margin-top: 0;
+}
+
+.gameOver__text {
+    font-size: 2em;
+}
+
+.gameOver__btn-restart {
+    background-color: #FF4500;
+    color: white;
+    font-size: 1.5em;
+    font-family: Arial, sans-serif;
+    text-shadow: 1px 1px 1px black;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.gameOver__btn-restart:hover {
+    background-color: #FF8C00;
+}
